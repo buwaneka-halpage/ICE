@@ -11,6 +11,7 @@ export const ANCILLARY_TARGET_USD = 5035; // 4280 / 0.85
 export const QA_RATING_PCT = 98.4;
 export const TRANSLATION_NON_ENGLISH_PCT = 78;
 export const AR_TRACKING_ACCURACY_PCT = 98.2;
+export const OPTIMAL_WPM = 130;
 export const DEMO_GLASS = {
   id: "AS-ARIA-024",
   battery: 82,

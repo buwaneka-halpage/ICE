@@ -19,9 +19,9 @@ export type GlassUnit = {
   guestId: number | null;
 };
 
-const LANGUAGES = ["German", "Mandarin", "Hindi", "English"] as const;
-
-function languageForDeployedIndex(i: number): (typeof LANGUAGES)[number] {
+function languageForDeployedIndex(
+  i: number,
+): "German" | "Mandarin" | "Hindi" | "English" {
   const german = Math.round((LANGUAGE_SHARE.german / 100) * DEPLOYED_UNITS);
   const mandarin = Math.round((LANGUAGE_SHARE.mandarin / 100) * DEPLOYED_UNITS);
   const hindi = Math.round((LANGUAGE_SHARE.hindi / 100) * DEPLOYED_UNITS);
