@@ -43,5 +43,6 @@ const path = capturePathname(
 assert.equal(path.startsWith("captures/AS-ARIA-024/cap_vg01-"), true);
 assert.equal(parseCapturePath(path).device_id, "AS-ARIA-024");
 assert.equal(parseCapturePath(path).capture_id, "cap_vg01");
+assert.equal(utilizationPct(FLEET_SIZE, FLEET_SIZE), 100);
 
 console.log("metrics self-check passed");

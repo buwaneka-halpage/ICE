@@ -6,23 +6,14 @@ export function Mark({ className = "h-6 w-6" }: { className?: string }) {
       aria-hidden="true"
       fill="none"
     >
-      <rect
-        x="1.5"
-        y="1.5"
-        width="29"
-        height="29"
-        rx="8"
-        stroke="currentColor"
-        strokeOpacity="0.35"
-        strokeWidth="1.2"
-      />
+      <circle cx="16" cy="16" r="13" stroke="currentColor" strokeWidth="1.15" />
       <path
-        d="M8 20.5c3.2-6.2 6.4-9.5 8-9.5s4.8 3.3 8 9.5"
-        stroke="#F59E0B"
-        strokeWidth="1.6"
+        d="M6 18.5c3.2-1.6 6.4-2.4 10-2.4s6.8.8 10 2.4"
+        stroke="currentColor"
+        strokeWidth="1.15"
         strokeLinecap="round"
       />
-      <circle cx="16" cy="16.5" r="2.2" fill="#0EA5E9" />
+      <circle cx="16" cy="13.5" r="3.1" fill="#C45C26" />
     </svg>
   );
 }
@@ -39,18 +30,14 @@ export function Wordmark({
       <Mark className="h-7 w-7 text-ink" />
       <div className="leading-tight">
         <div className="flex items-baseline gap-2">
-          <span className="text-[15px] font-medium tracking-tight text-ink">
-            AISee
+          <span className="font-serif text-[18px] tracking-tight text-ink">
+            See Mo
           </span>
           {!compact && (
-            <span className="font-mono text-[10px] tracking-[0.16em] text-telemetry uppercase">
-              Enterprise
-            </span>
+            <span className="text-[12px] text-ink-dim">Sigiriya</span>
           )}
         </div>
-        {subtitle && (
-          <p className="text-[11px] text-ink-dim">{subtitle}</p>
-        )}
+        {subtitle && <p className="text-[11px] text-ink-dim">{subtitle}</p>}
       </div>
     </div>
   );

@@ -32,23 +32,25 @@ export function RoiTracker() {
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="label">HaaS unit economics</p>
-          <h2 className="mt-1 text-[15px] tracking-tight">6-month hardware amortization</h2>
+          <h2 className="mt-1 font-serif text-[17px] tracking-tight">
+            6-month hardware amortization
+          </h2>
         </div>
         <div className="text-right">
-          <p className="font-mono text-[11px] text-telemetry">
+          <p className="text-[12px] text-telemetry">
             ${CAPEX_PER_GLASS_USD} capex / lease
           </p>
-          <p className="font-mono text-[11px] text-sun">
+          <p className="text-[12px] text-sun">
             ${SURCHARGE_PER_TOURIST_USD} / tourist surcharge
           </p>
         </div>
       </div>
 
       <svg viewBox={`0 0 ${w} ${h}`} className="mt-3 w-full" aria-hidden>
-        <path d={costPath} fill="none" stroke="#64748B" strokeDasharray="4 3" strokeWidth="1.2" />
-        <path d={revPath} fill="none" stroke="#10B981" strokeWidth="1.8" />
-        <circle cx={bx} cy={by} r="3.5" fill="#F59E0B" />
-        <text x={bx + 6} y={by - 6} fill="#F59E0B" fontSize="9" fontFamily="ui-monospace, monospace">
+        <path d={costPath} fill="none" stroke="#6B6258" strokeDasharray="4 3" strokeWidth="1.2" />
+        <path d={revPath} fill="none" stroke="#3D6B47" strokeWidth="1.8" />
+        <circle cx={bx} cy={by} r="3.5" fill="#C45C26" />
+        <text x={bx + 6} y={by - 6} fill="#C45C26" fontSize="9" fontFamily="ui-sans-serif, system-ui, sans-serif">
           BE {BREAK_EVEN_MONTH} mo
         </text>
         {MONTHS.slice(1).map((m) => (
@@ -56,9 +58,9 @@ export function RoiTracker() {
             key={m}
             x={x(m)}
             y={h - 6}
-            fill="#64748B"
+            fill="#6B6258"
             fontSize="9"
-            fontFamily="ui-monospace, monospace"
+            fontFamily="ui-sans-serif, system-ui, sans-serif"
             textAnchor="middle"
           >
             M{m}

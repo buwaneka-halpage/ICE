@@ -19,9 +19,9 @@ const instrument = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "AISee Travel — Operator & Companion",
+  title: "See Mo — Operator & Companion",
   description:
-    "Enterprise fleet operations and tourist companion for the AISee Travel AR glasses ecosystem.",
+    "Operator briefing and guest companion for See Mo glasses at Sigiriya.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

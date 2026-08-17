@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Settings — AISee Enterprise",
+  title: "Settings — See Mo",
 };
 
 const TOGGLES = [
@@ -18,14 +18,14 @@ export default function SettingsPage() {
     <div className="grid max-w-3xl gap-3">
       <section className="panel p-4">
         <p className="label">Fleet policy</p>
-        <h2 className="mt-1 text-[15px] tracking-tight">Central Province defaults</h2>
-        <ul className="mt-4 divide-y divide-white/6">
+        <h2 className="mt-1 font-serif text-[17px] tracking-tight">Central Province defaults</h2>
+        <ul className="mt-4 divide-y divide-line">
           {TOGGLES.map((t) => (
             <li key={t.k} className="flex items-center justify-between py-3 text-[13px]">
               <span>{t.k}</span>
               <span
                 className={`relative h-5 w-9 rounded-full ${
-                  t.on ? "bg-health/80" : "bg-white/10"
+                  t.on ? "bg-health/80" : "bg-line"
                 }`}
               >
                 <span
@@ -41,13 +41,13 @@ export default function SettingsPage() {
       <section className="panel p-4">
         <p className="label">Broadcast templates</p>
         <div className="mt-3 space-y-2 text-[13px] text-ink-dim">
-          <p className="rounded-lg border border-white/10 bg-surface px-3 py-2">
+          <p className="rounded-md border border-line bg-surface px-3 py-2">
             Weather hold — Pidurangala cell
           </p>
-          <p className="rounded-lg border border-white/10 bg-surface px-3 py-2">
+          <p className="rounded-md border border-line bg-surface px-3 py-2">
             Medical — request site first-aid to Lion terrace
           </p>
-          <p className="rounded-lg border border-white/10 bg-surface px-3 py-2">
+          <p className="rounded-md border border-line bg-surface px-3 py-2">
             Close fresco pocket — occupancy cap reached
           </p>
         </div>

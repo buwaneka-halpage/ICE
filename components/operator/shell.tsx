@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Wordmark } from "@/components/brand/mark";
+import { Mark, Wordmark } from "@/components/brand/mark";
 import { ANCILLARY_MTD_USD } from "@/lib/metrics";
 import { OPERATOR_SITE, TOUR_GROUPS } from "@/lib/tour";
 
@@ -98,15 +98,13 @@ export function OperatorShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-dvh bg-obsidian text-ink">
       <aside
-        className={`sticky top-0 flex h-dvh shrink-0 flex-col border-r border-white/10 bg-surface transition-[width] duration-200 ${
+        className={`sticky top-0 flex h-dvh shrink-0 flex-col border-r border-line bg-surface transition-[width] duration-200 ${
           collapsed ? "w-[64px]" : "w-[232px]"
         }`}
       >
-        <div className="flex h-14 items-center justify-between border-b border-white/10 px-3">
+        <div className="flex h-14 items-center justify-between border-b border-line px-3">
           {!collapsed && <Wordmark compact />}
-          {collapsed && (
-            <span className="mx-auto font-mono text-[10px] text-telemetry">AS</span>
-          )}
+          {collapsed && <Mark className="mx-auto h-6 w-6 text-ink" />}
         </div>
         <nav className="flex flex-1 flex-col gap-0.5 p-2">
           {NAV.map((item) => {
@@ -119,10 +117,10 @@ export function OperatorShell({ children }: { children: React.ReactNode }) {
                 key={item.href}
                 href={item.href}
                 title={item.label}
-                className={`flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-[13px] transition-colors ${
+                className={`flex items-center gap-2.5 rounded-md px-2.5 py-2 text-[13px] transition-colors ${
                   active
-                    ? "bg-white/6 text-ink"
-                    : "text-ink-dim hover:bg-white/4 hover:text-ink"
+                    ? "bg-elevated text-ink"
+                    : "text-ink-dim hover:bg-elevated/70 hover:text-ink"
                 }`}
               >
                 <span className={active ? "text-sun" : "text-telemetry"}>
@@ -133,59 +131,59 @@ export function OperatorShell({ children }: { children: React.ReactNode }) {
             );
           })}
         </nav>
-        <div className="border-t border-white/10 p-2">
+        <div className="border-t border-line p-2">
           <button
             type="button"
             onClick={() => setCollapsed((v) => !v)}
-            className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-[12px] text-ink-dim hover:bg-white/4 hover:text-ink"
+            className="flex w-full items-center gap-2 rounded-md px-2.5 py-2 text-[12px] text-ink-dim hover:bg-elevated hover:text-ink"
           >
-            <span className="font-mono text-[11px]">{collapsed ? "›" : "‹"}</span>
+            <span className="text-[11px]">{collapsed ? "›" : "‹"}</span>
             {!collapsed && <span>Collapse</span>}
           </button>
           <Link
             href="/"
-            className="mt-0.5 flex items-center gap-2 rounded-lg px-2.5 py-2 text-[12px] text-ink-dim hover:bg-white/4 hover:text-ink"
+            className="mt-0.5 flex items-center gap-2 rounded-md px-2.5 py-2 text-[12px] text-ink-dim hover:bg-elevated hover:text-ink"
           >
-            <span className="font-mono text-[11px]">↑</span>
+            <span className="text-[11px]">↑</span>
             {!collapsed && <span>Portal hub</span>}
           </Link>
         </div>
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-20 flex h-14 items-center justify-between gap-4 border-b border-white/10 bg-obsidian/85 px-4 backdrop-blur-md">
+        <header className="sticky top-0 z-20 flex h-14 items-center justify-between gap-4 border-b border-line bg-obsidian px-4">
           <div className="min-w-0">
             <Wordmark
               subtitle={`${OPERATOR_SITE.company} — ${OPERATOR_SITE.fleetLabel}`}
             />
           </div>
           <div className="hidden items-center lg:flex">
-            <div className="flex items-center gap-2 rounded-full border border-white/10 bg-elevated px-3 py-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-health shadow-[0_0_8px_#10B981]" />
-              <span className="font-mono text-[11px] text-ink-dim">
-                {paxToday} guests · {mtdK} MTD · QA on plan
+            <div className="flex items-center gap-2 rounded-full border border-line bg-elevated px-3 py-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-health" />
+              <span className="text-[12px] text-ink-dim">
+                {paxToday} guests · {mtdK} MTD · quality on plan
               </span>
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <div className="hidden rounded-lg border border-white/10 bg-elevated px-2.5 py-1.5 text-right md:block">
-              <p className="font-mono text-[10px] text-telemetry">{clock} SLST</p>
+            <div className="hidden rounded-md border border-line bg-elevated px-2.5 py-1.5 text-right md:block">
+              <p className="text-[11px] text-telemetry">{clock} SLST</p>
               <p className="text-[11px] text-ink-dim">{OPERATOR_SITE.filter}</p>
             </div>
             <button
               type="button"
               onClick={() => setBroadcast(true)}
-              className="rounded-lg border border-heritage/40 bg-heritage/15 px-3 py-1.5 text-[12px] font-medium text-sun hover:bg-heritage/25"
+              className="rounded-md bg-heritage px-3 py-1.5 text-[12px] font-medium text-white hover:bg-heritage/90"
             >
               Advisory
             </button>
-            <div className="flex items-center gap-2 rounded-lg border border-white/10 bg-elevated py-1 pr-2.5 pl-1">
-              <div className="flex h-7 w-7 items-center justify-center rounded-md bg-surface font-mono text-[10px] text-sun">
+            <div className="flex items-center gap-2 rounded-md border border-line bg-elevated py-1 pr-2.5 pl-1">
+              <div className="flex h-7 w-7 items-center justify-center rounded-sm bg-surface text-[11px] text-sun">
                 PM
               </div>
               <div className="hidden leading-tight sm:block">
                 <p className="text-[12px]">{OPERATOR_SITE.admin.name}</p>
-                <p className="font-mono text-[10px] text-telemetry">
+                <p className="text-[11px] text-telemetry">
                   {OPERATOR_SITE.admin.role}
                 </p>
               </div>
@@ -196,30 +194,30 @@ export function OperatorShell({ children }: { children: React.ReactNode }) {
       </div>
 
       {broadcast && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
-          <div className="panel w-full max-w-md p-5 shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
+          <div className="panel w-full max-w-md p-5">
             <p className="label">Leadership channel</p>
-            <h2 className="mt-2 text-lg tracking-tight">Property advisory</h2>
+            <h2 className="mt-1 font-serif text-lg tracking-tight">Property advisory</h2>
             <p className="mt-1 text-[13px] text-ink-dim">
               Goes to site managers and lead guides — not a public guest
               interrupt. Use for tomorrow’s yield, weather, or a site closure.
             </p>
             <textarea
               defaultValue="Hold position at current node. Storm cell west of Pidurangala — 18 min. Guides acknowledge."
-              className="mt-4 h-24 w-full resize-none rounded-lg border border-white/10 bg-surface p-3 text-[13px] text-ink outline-none focus:border-sun/50"
+              className="mt-4 h-24 w-full resize-none rounded-md border border-line bg-elevated p-3 text-[13px] text-ink outline-none focus:border-sun"
             />
             <div className="mt-4 flex justify-end gap-2">
               <button
                 type="button"
                 onClick={() => setBroadcast(false)}
-                className="rounded-lg px-3 py-1.5 text-[13px] text-ink-dim hover:text-ink"
+                className="rounded-md px-3 py-1.5 text-[13px] text-ink-dim hover:text-ink"
               >
                 Cancel
               </button>
               <button
                 type="button"
                 onClick={() => setBroadcast(false)}
-                className="rounded-lg bg-heritage px-3 py-1.5 text-[13px] font-medium text-white"
+                className="rounded-md bg-heritage px-3 py-1.5 text-[13px] font-medium text-white"
               >
                 Issue advisory
               </button>
