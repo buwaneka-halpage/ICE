@@ -77,7 +77,7 @@ export function LiveCaptures({
     <section className="panel overflow-hidden">
       <div className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
         <div>
-          <p className="label">Vercel Blob · live captures</p>
+          <p className="label">Guest photos</p>
           <h2 className="mt-1 text-[15px] tracking-tight">
             {configured
               ? `${captures.length} image${captures.length === 1 ? "" : "s"} in store`

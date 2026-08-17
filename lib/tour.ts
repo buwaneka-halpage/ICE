@@ -77,7 +77,7 @@ export const OPERATOR_SITE = {
   company: "Aitken Spence Travels",
   fleetLabel: "Central Province Fleet",
   filter: "Today, Aug 2026 — Sigiriya Operations",
-  admin: { name: "Priya Mendis", role: "Fleet Ops" },
+  admin: { name: "Priya Mendis", role: "Head of Experiences" },
 };
 
 export const COMPANION = {
@@ -103,18 +103,21 @@ export const JOURNEY = [
     title: "Bus ride briefing",
     detail: "Audio translated to German · 22 min",
     badge: null as string | null,
+    sight: "pidurangala" as const,
   },
   {
     time: "09:45",
     title: "Water Gardens",
     detail: "Fountain #3 · hydraulic overlay unlocked",
     badge: "Hydraulic Engineering",
+    sight: "sigiriya" as const,
   },
   {
     time: "10:30",
     title: "Sigiriya Frescoes",
     detail: "Custom Solo Art Route taken",
     badge: "Solo Art Route",
+    sight: "dambulla" as const,
   },
 ];
 
@@ -136,32 +139,50 @@ export const QA_LOG = [
 export const VAULT_MOMENTS = [
   {
     id: "vg-01",
-    title: "Fountain #3 · first look",
-    meta: "AS-ARIA-024 · 09:47 · 24 mm",
-    kind: "water",
+    title: "Sigiriya from the gardens",
+    meta: "Lion Rock · 5th c. palace",
+    sight: "sigiriya",
   },
   {
-    id: "mw-01",
-    title: "Mirror Wall verse",
-    meta: "AS-ARIA-024 · 10:12 · 50 mm",
-    kind: "wall",
+    id: "pd-01",
+    title: "Pidurangala at golden hour",
+    meta: "Opposite terrace · monastic",
+    sight: "pidurangala",
   },
   {
-    id: "fr-01",
-    title: "Western pocket frescoes",
-    meta: "AS-ARIA-024 · 10:34 · 35 mm",
-    kind: "fresco",
+    id: "db-01",
+    title: "Dambulla cave shrine",
+    meta: "UNESCO · 1st c. BCE",
+    sight: "dambulla",
   },
   {
-    id: "lp-01",
-    title: "Lion’s Paw terrace",
-    meta: "AS-ARIA-024 · 11:02 · 18 mm",
-    kind: "lion",
+    id: "kd-01",
+    title: "Temple of the Tooth",
+    meta: "Kandy · Sri Dalada Maligawa",
+    sight: "tooth",
   },
   {
-    id: "sm-01",
-    title: "Summit wind, looking south",
-    meta: "AS-ARIA-024 · 11:41 · 16 mm",
-    kind: "summit",
+    id: "an-01",
+    title: "Ruwanwelisaya dagoba",
+    meta: "Anuradhapura · Dutugemunu",
+    sight: "ruwan",
+  },
+  {
+    id: "pl-01",
+    title: "Polonnaruwa vatadage",
+    meta: "12th c. relic house",
+    sight: "polonnaruwa",
+  },
+  {
+    id: "gl-01",
+    title: "Galle Fort light",
+    meta: "Dutch ramparts · UNESCO",
+    sight: "galle",
+  },
+  {
+    id: "sp-01",
+    title: "Sri Pada before dawn",
+    meta: "Adam’s Peak pilgrim path",
+    sight: "sri-pada",
   },
 ] as const;
