@@ -75,7 +75,7 @@ export function LiveCaptures({
 
   return (
     <section className="panel overflow-hidden">
-      <div className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
+      <div className="flex items-center justify-between gap-3 border-b border-line px-4 py-3">
         <div>
           <p className="label">Guest photos</p>
           <h2 className="mt-1 text-[15px] tracking-tight">
@@ -85,7 +85,7 @@ export function LiveCaptures({
           </h2>
         </div>
         {allowUpload && (
-          <label className="cursor-pointer rounded-lg border border-white/10 bg-surface px-3 py-1.5 text-[12px] text-ink-dim hover:text-ink">
+          <label className="cursor-pointer rounded-md border border-line bg-surface px-3 py-1.5 text-[12px] text-ink-dim hover:text-ink">
             {busy ? "Uploading…" : "Upload image"}
             <input
               type="file"
@@ -120,8 +120,8 @@ export function LiveCaptures({
               key={c.pathname}
               className={
                 layout === "strip"
-                  ? "w-36 shrink-0 overflow-hidden rounded-lg border border-white/10"
-                  : "overflow-hidden rounded-lg border border-white/10"
+                  ? "w-36 shrink-0 overflow-hidden rounded-md border border-line"
+                  : "overflow-hidden rounded-md border border-line"
               }
             >
               {/* ponytail: remote blob host varies per store; <img> skips next/image config */}
@@ -131,8 +131,8 @@ export function LiveCaptures({
                 className="aspect-[4/3] w-full object-cover"
               />
               <figcaption className="px-2 py-1.5">
-                <p className="truncate font-mono text-[10px] text-sun">{c.device_id}</p>
-                <p className="truncate font-mono text-[10px] text-telemetry">
+                <p className="truncate text-[11px] text-sun">{c.device_id}</p>
+                <p className="truncate text-[11px] text-telemetry">
                   {new Date(c.uploadedAt).toLocaleTimeString("en-GB", {
                     hour: "2-digit",
                     minute: "2-digit",

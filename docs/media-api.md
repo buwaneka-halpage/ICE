@@ -1,6 +1,6 @@
 # Media ingest (Vercel Blob)
 
-Glasses and tools POST images to the operator dashboard through this app. Files land in **Vercel Blob** and show up on Live Operations, Content & AR Assets, and the companion Memory Vault.
+Glasses and tools POST images to the operator dashboard through this app. Files land in **Vercel Blob** and show up on the briefing, Guest memories, and the companion Memory vault.
 
 ## Connect the store (once)
 

@@ -3,7 +3,7 @@ import { QA_RATING_PCT } from "@/lib/metrics";
 import { QA_FLAGS_TODAY, TOUR_GROUPS } from "@/lib/tour";
 
 export const metadata: Metadata = {
-  title: "Guest experience — AISee Enterprise",
+  title: "Guest experience — See Mo",
 };
 
 const GUIDES = [
@@ -19,7 +19,7 @@ export default function QualityPage() {
     <div className="grid max-w-4xl gap-3">
       <section className="panel p-5">
         <p className="label">Guest experience</p>
-        <h1 className="mt-1 text-2xl tracking-tight">
+        <h1 className="mt-1 font-serif text-2xl tracking-tight">
           {QA_RATING_PCT}% quality · {QA_FLAGS_TODAY} incidents · {pax} guests
         </h1>
         <p className="mt-2 max-w-xl text-[14px] leading-relaxed text-ink-dim">
@@ -30,7 +30,7 @@ export default function QualityPage() {
       </section>
       <section className="panel p-5">
         <p className="label">Guide contribution</p>
-        <ul className="mt-3 divide-y divide-white/6">
+        <ul className="mt-3 divide-y divide-line">
           {GUIDES.map((g) => (
             <li key={g.name} className="flex items-center justify-between py-3">
               <div>
@@ -38,8 +38,8 @@ export default function QualityPage() {
                 <p className="text-[12px] text-ink-dim">{g.note}</p>
               </div>
               <div className="text-right">
-                <p className="font-mono text-[13px] text-health">{g.score}%</p>
-                <p className="font-mono text-[10px] text-telemetry">{g.pax} pax</p>
+                <p className="text-[13px] text-health">{g.score}%</p>
+                <p className="text-[12px] text-telemetry">{g.pax} pax</p>
               </div>
             </li>
           ))}

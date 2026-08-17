@@ -8,7 +8,7 @@ import {
 } from "@/lib/metrics";
 
 export const metadata: Metadata = {
-  title: "Revenue & HaaS ROI — AISee Enterprise",
+  title: "Revenue & HaaS ROI — See Mo",
 };
 
 const LINES = [
@@ -27,7 +27,7 @@ export default function RevenuePage() {
       <RoiTracker />
       <section className="panel p-4">
         <p className="label">Ancillary mix · August 2026</p>
-        <h2 className="mt-1 text-[15px] tracking-tight">
+        <h2 className="mt-1 font-serif text-[17px] tracking-tight">
           ${ANCILLARY_MTD_USD.toLocaleString("en-US")} MTD
         </h2>
         <ul className="mt-4 space-y-3">
@@ -35,11 +35,11 @@ export default function RevenuePage() {
             <li key={l.label}>
               <div className="flex justify-between text-[13px]">
                 <span>{l.label}</span>
-                <span className="font-mono text-ink-dim">
+                <span className="text-ink-dim">
                   ${l.amount.toLocaleString("en-US")}
                 </span>
               </div>
-              <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-white/6">
+              <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-surface">
                 <div
                   className="h-full rounded-full bg-sun"
                   style={{ width: `${l.share}%` }}
@@ -49,15 +49,15 @@ export default function RevenuePage() {
           ))}
         </ul>
         <div className="mt-5 grid grid-cols-2 gap-2">
-          <div className="rounded-lg border border-white/10 bg-surface p-3">
-            <p className="font-mono text-[10px] text-telemetry">Per-glass run-rate</p>
-            <p className="text-xl">${MONTHLY_NET_PROFIT_PER_GLASS_USD.toFixed(2)}</p>
+          <div className="rounded-md border border-line bg-surface p-3">
+            <p className="text-[12px] text-telemetry">Per-glass run-rate</p>
+            <p className="font-serif text-xl">${MONTHLY_NET_PROFIT_PER_GLASS_USD.toFixed(2)}</p>
           </div>
-          <div className="rounded-lg border border-white/10 bg-surface p-3">
-            <p className="font-mono text-[10px] text-telemetry">
+          <div className="rounded-md border border-line bg-surface p-3">
+            <p className="text-[12px] text-telemetry">
               {FLEET_COUNTS.deployed} units deployed
             </p>
-            <p className="text-xl">${monthlyFleet.toLocaleString("en-US")}</p>
+            <p className="font-serif text-xl">${monthlyFleet.toLocaleString("en-US")}</p>
           </div>
         </div>
         <p className="mt-4 text-[12px] text-ink-dim">

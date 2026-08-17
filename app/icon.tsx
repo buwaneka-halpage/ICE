@@ -10,17 +10,17 @@ export default function Icon() {
         style={{
           width: 32,
           height: 32,
-          background: "#0B0D11",
-          borderRadius: 8,
+          background: "#F6F0E6",
+          borderRadius: 6,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "#F59E0B",
-          fontSize: 16,
-          fontWeight: 600,
+          color: "#C45C26",
+          fontSize: 18,
+          fontFamily: "Georgia, serif",
         }}
       >
-        A
+        M
       </div>
     ),
     size,

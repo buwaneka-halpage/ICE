@@ -8,7 +8,7 @@ import {
 } from "@/lib/metrics";
 
 export const metadata: Metadata = {
-  title: "Capacity — AISee Enterprise",
+  title: "Capacity — See Mo",
 };
 
 export default function FleetPage() {
@@ -20,7 +20,7 @@ export default function FleetPage() {
     <div className="grid max-w-4xl gap-3">
       <section className="panel p-5">
         <p className="label">Capacity</p>
-        <h1 className="mt-1 text-2xl tracking-tight">
+        <h1 className="mt-1 font-serif text-2xl tracking-tight">
           {util}% of the fleet is earning. {idle} glasses are not.
         </h1>
         <p className="mt-2 max-w-xl text-[14px] leading-relaxed text-ink-dim">
@@ -29,23 +29,23 @@ export default function FleetPage() {
           month if they go back on heads.
         </p>
         <dl className="mt-5 grid grid-cols-3 gap-3 text-[13px]">
-          <div className="rounded-lg border border-white/10 bg-surface p-3">
-            <dt className="font-mono text-[10px] text-telemetry">On tour</dt>
-            <dd className="mt-1 text-xl">{FLEET_COUNTS.deployed}</dd>
+          <div className="rounded-md border border-line bg-surface p-3">
+            <dt className="text-[12px] text-telemetry">On tour</dt>
+            <dd className="mt-1 font-serif text-xl">{FLEET_COUNTS.deployed}</dd>
           </div>
-          <div className="rounded-lg border border-white/10 bg-surface p-3">
-            <dt className="font-mono text-[10px] text-telemetry">Idle / charged</dt>
-            <dd className="mt-1 text-xl text-sun">{idle}</dd>
+          <div className="rounded-md border border-line bg-surface p-3">
+            <dt className="text-[12px] text-telemetry">Idle / charged</dt>
+            <dd className="mt-1 font-serif text-xl text-sun">{idle}</dd>
           </div>
-          <div className="rounded-lg border border-white/10 bg-surface p-3">
-            <dt className="font-mono text-[10px] text-telemetry">Low-battery swaps</dt>
-            <dd className="mt-1 text-xl">{FLEET_COUNTS.lowBattery}</dd>
+          <div className="rounded-md border border-line bg-surface p-3">
+            <dt className="text-[12px] text-telemetry">Low-battery swaps</dt>
+            <dd className="mt-1 font-serif text-xl">{FLEET_COUNTS.lowBattery}</dd>
           </div>
         </dl>
       </section>
       <section className="panel p-5">
         <p className="label">Decision</p>
-        <h2 className="mt-1 text-[17px] tracking-tight">
+        <h2 className="mt-1 font-serif text-[18px] tracking-tight">
           Commit the idle six to the German FIT wave in week 35
         </h2>
         <p className="mt-2 text-[13px] leading-relaxed text-ink-dim">

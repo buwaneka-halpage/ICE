@@ -1,5 +1,7 @@
 # AISee Glasses Software — API Contract v1
 
+The guest and operator apps are branded **See Mo**. This document is the glasses firmware contract — hostnames, pairing prefix, and device IDs are unchanged.
+
 Status: **draft for device integration**. Operator Portal and Tourist Companion currently render mock data that matches these shapes. Implement this contract; the portals will switch from fixtures to these endpoints.
 
 Base URL (prod): `https://api.aisee.travel/v1`  

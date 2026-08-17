@@ -1,6 +1,6 @@
-# AISee Travel portals
+# See Mo portals
 
-Operator console and tourist companion for the AISee AR glasses deployment at Sigiriya (Aitken Spence Travels · Central Province fleet).
+Operator briefing and tourist companion for the See Mo glasses deployment at Sigiriya (Aitken Spence Travels · Central Province fleet).
 
 ```bash
 npm install
