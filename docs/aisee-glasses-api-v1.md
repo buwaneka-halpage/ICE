@@ -195,7 +195,7 @@ Cloud replies on the same socket with `command.kind = "qa_answer"` (see 4.3). Al
 }
 ```
 
-Then upload bytes via REST (`POST /v1/media`). Until the upload finishes, keep `status: "syncing"` on telemetry.
+Then upload bytes via REST (`POST /api/v1/media`). Until the upload finishes, keep `status: "syncing"` on telemetry.
 
 **`badge`** — guest unlocked a journey badge (`Hydraulic Engineering`, `Solo Art Route`).
 
@@ -297,7 +297,7 @@ This feeds Operator → Content & AR Assets and the map HUD (“Water Gardens Hy
 
 ### 5.3 Media (Memory Vault)
 
-**`POST /v1/media`** `multipart/form-data`
+**`POST /api/v1/media`** `multipart/form-data` (live Blob ingest; see `docs/media-api.md`)
 
 | Part | Type |
 | --- | --- |
@@ -320,7 +320,7 @@ This feeds Operator → Content & AR Assets and the map HUD (“Water Gardens Hy
 }
 ```
 
-**`GET /v1/companion/vault?session_id=`** — companion grid.
+**`GET /api/v1/media?device_id=`** — companion/operator vault grid.
 
 **`POST /v1/companion/vault/export`** — `{ "format": "reel-4k" | "day-recap" }`. Returns a signed URL when ready.
 

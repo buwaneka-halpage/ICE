@@ -16,6 +16,11 @@ import {
   monthlyNetAtEnd,
   utilizationPct,
 } from "../lib/metrics.ts";
+import {
+  capturePathname,
+  parseCapturePath,
+  sanitizeDeviceId,
+} from "../lib/captures.ts";
 
 assert.equal(utilizationPct(DEPLOYED_UNITS, FLEET_SIZE), 87.5);
 assert.equal(languageShareTotal(LANGUAGE_SHARE), 100);
@@ -28,5 +33,15 @@ assert.equal(DEMO_GLASS.battery, 82);
 assert.equal(DEMO_GLASS.tempC, 34);
 assert.equal(DEMO_GLASS.language, "German");
 assert.equal(FLEET_SIZE - DEPLOYED_UNITS, 6);
+
+assert.equal(sanitizeDeviceId("as-aria-024"), "AS-ARIA-024");
+assert.equal(sanitizeDeviceId("nope"), "UNKNOWN");
+const path = capturePathname(
+  { device_id: "AS-ARIA-024", capture_id: "cap_vg01" },
+  "Fountain #3.jpg",
+);
+assert.equal(path.startsWith("captures/AS-ARIA-024/cap_vg01-"), true);
+assert.equal(parseCapturePath(path).device_id, "AS-ARIA-024");
+assert.equal(parseCapturePath(path).capture_id, "cap_vg01");
 
 console.log("metrics self-check passed");

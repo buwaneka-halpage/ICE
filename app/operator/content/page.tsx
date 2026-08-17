@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { LiveCaptures } from "@/components/media/live-captures";
 import { AR_LAYER } from "@/lib/tour";
 
 export const metadata: Metadata = {
@@ -50,7 +51,9 @@ const ASSETS = [
 
 export default function ContentPage() {
   return (
-    <section className="panel overflow-hidden">
+    <div className="flex flex-col gap-3">
+      <LiveCaptures layout="grid" allowUpload />
+      <section className="panel overflow-hidden">
       <div className="border-b border-white/10 px-4 py-3">
         <p className="label">Content & AR assets</p>
         <h2 className="mt-1 text-[15px] tracking-tight">
@@ -89,6 +92,7 @@ export default function ContentPage() {
           </tbody>
         </table>
       </div>
-    </section>
+      </section>
+    </div>
   );
 }

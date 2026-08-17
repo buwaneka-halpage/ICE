@@ -1,6 +1,9 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+/* eslint-disable @next/next/no-img-element -- live blob URLs are store-specific */
+
+import { useEffect, useState, type ReactNode } from "react";
+import type { Capture } from "@/lib/captures";
 import { VAULT_MOMENTS } from "@/lib/tour";
 import { useCompanionTheme } from "./shell";
 
@@ -9,6 +12,18 @@ export function MemoryVault() {
   const light = theme === "light";
   const muted = light ? "text-[#7a6e5e]" : "text-ink-dim";
   const [playing, setPlaying] = useState(false);
+  const [live, setLive] = useState<Capture[]>([]);
+
+  useEffect(() => {
+    const load = () =>
+      fetch("/api/v1/media")
+        .then((r) => r.json())
+        .then((d: { captures?: Capture[] }) => setLive(d.captures ?? []))
+        .catch(() => {});
+    void load();
+    const id = setInterval(load, 10_000);
+    return () => clearInterval(id);
+  }, []);
 
   return (
     <div className="flex flex-col gap-5 pt-1">
@@ -24,6 +39,22 @@ export function MemoryVault() {
       <section>
         <p className={`label ${light ? "!text-[#7a6e5e]" : ""}`}>Auto captures</p>
         <div className="mt-2 grid grid-cols-2 gap-2">
+          {live.map((c) => (
+            <figure
+              key={c.pathname}
+              className={`overflow-hidden rounded-2xl border ${
+                light ? "border-[#e2d8c8]" : "border-white/10"
+              }`}
+            >
+              <img src={c.url} alt={c.title ?? c.capture_id} className="aspect-[4/3] w-full object-cover" />
+              <figcaption className="p-2.5">
+                <p className="text-[12px] leading-snug">{c.title ?? c.capture_id}</p>
+                <p className={`mt-0.5 font-mono text-[10px] ${muted}`}>
+                  {c.device_id} · live blob
+                </p>
+              </figcaption>
+            </figure>
+          ))}
           {VAULT_MOMENTS.map((m) => (
             <figure
               key={m.id}
