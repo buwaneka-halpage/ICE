@@ -4,19 +4,19 @@
 
 import { useEffect, useState } from "react";
 import type { Capture } from "@/lib/captures";
-import { SIGHT_BY_ID } from "@/lib/sights";
-import { VAULT_MOMENTS } from "@/lib/tour";
+import { mergeCaptures } from "@/lib/demo";
 
 export function MemoryVault() {
   const [playing, setPlaying] = useState(false);
-  const [live, setLive] = useState<Capture[]>([]);
+  const [saved, setSaved] = useState(false);
+  const [live, setLive] = useState<Capture[]>(() => mergeCaptures([]));
 
   useEffect(() => {
     const load = () =>
       fetch("/api/v1/media")
         .then((r) => r.json())
-        .then((d: { captures?: Capture[] }) => setLive(d.captures ?? []))
-        .catch(() => {});
+        .then((d: { captures?: Capture[] }) => setLive(mergeCaptures(d.captures ?? [])))
+        .catch(() => setLive(mergeCaptures([])));
     void load();
     const id = setInterval(load, 10_000);
     return () => clearInterval(id);
@@ -43,30 +43,11 @@ export function MemoryVault() {
               <figcaption className="p-2.5">
                 <p className="text-[12px] leading-snug">{c.title ?? c.capture_id}</p>
                 <p className="mt-0.5 text-[11px] text-ink-dim">
-                  {c.device_id} · live
+                  {c.device_id}
                 </p>
               </figcaption>
             </figure>
           ))}
-          {VAULT_MOMENTS.map((m) => {
-            const sight = SIGHT_BY_ID[m.sight];
-            return (
-            <figure
-              key={m.id}
-              className="overflow-hidden rounded-lg border border-line"
-            >
-              <img
-                src={sight.src}
-                alt={m.title}
-                className="aspect-[4/3] w-full object-cover"
-              />
-              <figcaption className="p-2.5">
-                <p className="text-[12px] leading-snug">{m.title}</p>
-                <p className="mt-0.5 text-[11px] text-ink-dim">{m.meta}</p>
-              </figcaption>
-            </figure>
-            );
-          })}
         </div>
       </section>
 
@@ -103,9 +84,10 @@ export function MemoryVault() {
       <div className="grid gap-2">
         <button
           type="button"
+          onClick={() => setSaved(true)}
           className="rounded-lg bg-heritage py-3 text-[13px] font-medium text-white"
         >
-          Export 4K trip reel to phone
+          {saved ? "Saved to camera roll" : "Export 4K trip reel to phone"}
         </button>
         <button
           type="button"
@@ -120,19 +102,47 @@ export function MemoryVault() {
 
 function BeforeAfter() {
   const [x, setX] = useState(48);
+  const [thenOk, setThenOk] = useState(false);
+
+  useEffect(() => {
+    let live = true;
+    fetch("/demo/fountain-then.jpg")
+      .then((res) => {
+        if (live) setThenOk(res.ok);
+      })
+      .catch(() => {
+        if (live) setThenOk(false);
+      });
+    return () => {
+      live = false;
+    };
+  }, []);
 
   return (
     <section>
-      <p className="label">Before & after · Fountain #3</p>
+      <p className="label">Before & after · water gardens</p>
       <div className="relative mt-2 aspect-[4/3] overflow-hidden rounded-lg border border-line">
         <div className="absolute inset-0">
-          <GardenAfter />
+          {thenOk ? (
+            <img
+              src="/demo/fountain-then.jpg"
+              alt="5th century reconstruction"
+              className="h-full w-full object-cover"
+              onError={() => setThenOk(false)}
+            />
+          ) : (
+            <GardenAfter />
+          )}
         </div>
         <div
           className="absolute inset-0"
           style={{ clipPath: `inset(0 ${100 - x}% 0 0)` }}
         >
-          <RuinBefore />
+          <img
+            src="/demo/fountain-today.jpg"
+            alt="Water gardens today"
+            className="h-full w-full object-cover"
+          />
         </div>
         <div
           className="absolute top-0 bottom-0 w-px bg-white"
@@ -159,20 +169,6 @@ function BeforeAfter() {
         </span>
       </div>
     </section>
-  );
-}
-
-function RuinBefore() {
-  return (
-    <svg viewBox="0 0 400 300" className="h-full w-full" aria-hidden>
-      <rect width="400" height="300" fill="#8a7a64" />
-      <rect width="400" height="180" fill="#6f6454" />
-      <rect x="40" y="150" width="320" height="90" fill="#c4b49a" />
-      <rect x="56" y="166" width="130" height="58" fill="#b39f82" />
-      <rect x="214" y="166" width="130" height="58" fill="#b39f82" />
-      <path d="M0 250 L400 220 L400 300 L0 300Z" fill="#5c5348" />
-      <circle cx="80" cy="70" r="18" fill="#d9cfc0" opacity="0.5" />
-    </svg>
   );
 }
 

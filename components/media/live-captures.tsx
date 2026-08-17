@@ -4,6 +4,7 @@
 
 import { useEffect, useState } from "react";
 import type { Capture } from "@/lib/captures";
+import { mergeCaptures } from "@/lib/demo";
 
 type Payload = { configured?: boolean; captures?: Capture[]; error?: { message: string } };
 
@@ -15,7 +16,7 @@ export function LiveCaptures({
   allowUpload?: boolean;
 }) {
   const [configured, setConfigured] = useState(true);
-  const [captures, setCaptures] = useState<Capture[]>([]);
+  const [captures, setCaptures] = useState<Capture[]>(() => mergeCaptures([]));
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
@@ -27,7 +28,7 @@ export function LiveCaptures({
         .then((data) => {
           if (cancelled) return;
           setConfigured(Boolean(data.configured));
-          setCaptures(data.captures ?? []);
+          setCaptures(mergeCaptures(data.captures ?? []));
           setError(data.error?.message ?? null);
         })
         .catch((err: unknown) => {
@@ -65,7 +66,7 @@ export function LiveCaptures({
         return;
       }
       if (data.capture) {
-        setCaptures((prev) => [data.capture!, ...prev]);
+        setCaptures((prev) => mergeCaptures([data.capture!, ...prev]));
         setConfigured(true);
       }
     } finally {
@@ -79,9 +80,7 @@ export function LiveCaptures({
         <div>
           <p className="label">Guest photos</p>
           <h2 className="mt-1 text-[15px] tracking-tight">
-            {configured
-              ? `${captures.length} image${captures.length === 1 ? "" : "s"} in store`
-              : "Blob store not connected"}
+            {captures.length} from this morning’s walk
           </h2>
         </div>
         {allowUpload && (
@@ -98,11 +97,13 @@ export function LiveCaptures({
         )}
       </div>
 
-      {!configured && (
+      {allowUpload && !configured && (
         <p className="px-4 py-3 text-[13px] text-ink-dim">
-          In Vercel → Storage, create a Blob store and connect it to this project.
-          Redeploy so <span className="font-mono text-[12px]">BLOB_READ_WRITE_TOKEN</span> is
-          set. Then POST to <span className="font-mono text-[12px]">/api/v1/media</span>.
+          Live ingest is off until Blob is connected. Scenario stills below still
+          show. Redeploy with{" "}
+          <span className="font-mono text-[12px]">BLOB_READ_WRITE_TOKEN</span> to
+          POST new frames to{" "}
+          <span className="font-mono text-[12px]">/api/v1/media</span>.
         </p>
       )}
       {error && <p className="px-4 py-2 text-[12px] text-sun">{error}</p>}
