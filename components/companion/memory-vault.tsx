@@ -2,8 +2,9 @@
 
 /* eslint-disable @next/next/no-img-element -- live blob URLs are store-specific */
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState } from "react";
 import type { Capture } from "@/lib/captures";
+import { SIGHT_BY_ID } from "@/lib/sights";
 import { VAULT_MOMENTS } from "@/lib/tour";
 import { useCompanionTheme } from "./shell";
 
@@ -55,20 +56,27 @@ export function MemoryVault() {
               </figcaption>
             </figure>
           ))}
-          {VAULT_MOMENTS.map((m) => (
+          {VAULT_MOMENTS.map((m) => {
+            const sight = SIGHT_BY_ID[m.sight];
+            return (
             <figure
               key={m.id}
               className={`overflow-hidden rounded-2xl border ${
                 light ? "border-[#e2d8c8]" : "border-white/10"
               }`}
             >
-              <Photo kind={m.kind} />
+              <img
+                src={sight.src}
+                alt={m.title}
+                className="aspect-[4/3] w-full object-cover"
+              />
               <figcaption className="p-2.5">
                 <p className="text-[12px] leading-snug">{m.title}</p>
                 <p className={`mt-0.5 font-mono text-[10px] ${muted}`}>{m.meta}</p>
               </figcaption>
             </figure>
-          ))}
+            );
+          })}
         </div>
       </section>
 
@@ -204,41 +212,4 @@ function GardenAfter() {
       <path d="M0 0 L400 0 L400 90 L0 140Z" fill="#f59e0b" opacity="0.18" />
     </svg>
   );
-}
-
-function Photo({ kind }: { kind: (typeof VAULT_MOMENTS)[number]["kind"] }) {
-  const scenes: Record<string, ReactNode> = {
-    water: <GardenAfter />,
-    wall: (
-      <svg viewBox="0 0 400 300" className="h-full w-full" aria-hidden>
-        <rect width="400" height="300" fill="#cfc3ae" />
-        <path d="M0 40 L400 10 L400 300 L0 300Z" fill="#b7aa94" />
-        <path d="M40 80 h80 M40 100 h120 M40 120 h60" stroke="#6f6454" strokeWidth="2" />
-      </svg>
-    ),
-    fresco: (
-      <svg viewBox="0 0 400 300" className="h-full w-full" aria-hidden>
-        <rect width="400" height="300" fill="#5a2e24" />
-        <ellipse cx="160" cy="140" rx="50" ry="70" fill="#c45c3a" />
-        <ellipse cx="250" cy="150" rx="46" ry="66" fill="#d97706" />
-        <rect width="400" height="300" fill="#2a1814" opacity="0.25" />
-      </svg>
-    ),
-    lion: (
-      <svg viewBox="0 0 400 300" className="h-full w-full" aria-hidden>
-        <rect width="400" height="300" fill="#3d3428" />
-        <path d="M40 220 C80 140 120 140 160 220" fill="#c4b49a" />
-        <path d="M240 220 C280 140 320 140 360 220" fill="#c4b49a" />
-        <rect x="170" y="80" width="60" height="140" fill="#2a261f" />
-      </svg>
-    ),
-    summit: (
-      <svg viewBox="0 0 400 300" className="h-full w-full" aria-hidden>
-        <rect width="400" height="300" fill="#87a0b8" />
-        <path d="M0 160 L400 130 L400 300 L0 300Z" fill="#5a6e4a" />
-        <path d="M0 0 L400 0 L400 90 L0 70Z" fill="#f59e0b" opacity="0.35" />
-      </svg>
-    ),
-  };
-  return <div className="aspect-[4/3]">{scenes[kind]}</div>;
 }

@@ -1,7 +1,10 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element -- heritage stills from Wikimedia Commons */
+
 import { useState } from "react";
 import { JOURNEY, QA_LOG } from "@/lib/tour";
+import { SIGHT_BY_ID } from "@/lib/sights";
 import { useCompanionTheme } from "./shell";
 
 export function Journey() {
@@ -33,10 +36,16 @@ export function Journey() {
               )}
             </div>
             <div
-              className={`flex-1 rounded-2xl border p-3 ${
+              className={`flex-1 overflow-hidden rounded-2xl border ${
                 light ? "border-[#e2d8c8] bg-white/70" : "border-white/10 bg-elevated/80"
               }`}
             >
+              <img
+                src={SIGHT_BY_ID[j.sight].src}
+                alt={j.title}
+                className="aspect-[16/9] w-full object-cover"
+              />
+              <div className="p-3">
               <p className="text-[14px]">{j.title}</p>
               <p className={`mt-0.5 text-[12px] ${muted}`}>{j.detail}</p>
               {j.badge && (
@@ -44,6 +53,7 @@ export function Journey() {
                   Unlocked · {j.badge}
                 </span>
               )}
+              </div>
             </div>
           </li>
         ))}

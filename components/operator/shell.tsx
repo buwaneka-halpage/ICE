@@ -4,15 +4,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Wordmark } from "@/components/brand/mark";
-import { FLEET_COUNTS } from "@/lib/fleet";
+import { ANCILLARY_MTD_USD } from "@/lib/metrics";
 import { OPERATOR_SITE, TOUR_GROUPS } from "@/lib/tour";
 
 const NAV = [
-  { href: "/operator", label: "Live Operations", icon: "live" },
-  { href: "/operator/fleet", label: "Fleet Telemetry", icon: "fleet" },
-  { href: "/operator/quality", label: "Tour Quality & QA", icon: "qa" },
-  { href: "/operator/revenue", label: "Revenue & HaaS ROI", icon: "roi" },
-  { href: "/operator/content", label: "Content & AR Assets", icon: "ar" },
+  { href: "/operator", label: "Briefing", icon: "live" },
+  { href: "/operator/fleet", label: "Capacity", icon: "fleet" },
+  { href: "/operator/quality", label: "Guest experience", icon: "qa" },
+  { href: "/operator/revenue", label: "Unit economics", icon: "roi" },
+  { href: "/operator/content", label: "Guest memories", icon: "ar" },
   { href: "/operator/settings", label: "Settings", icon: "gear" },
 ] as const;
 
@@ -92,8 +92,8 @@ export function OperatorShell({ children }: { children: React.ReactNode }) {
     return () => clearInterval(id);
   }, []);
 
-  const online = FLEET_COUNTS.deployed;
-  const tours = TOUR_GROUPS.length;
+  const paxToday = TOUR_GROUPS.reduce((n, g) => n + g.headcount, 0);
+  const mtdK = `$${(ANCILLARY_MTD_USD / 1000).toFixed(1)}k`;
 
   return (
     <div className="flex min-h-dvh bg-obsidian text-ink">
@@ -163,11 +163,7 @@ export function OperatorShell({ children }: { children: React.ReactNode }) {
             <div className="flex items-center gap-2 rounded-full border border-white/10 bg-elevated px-3 py-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-health shadow-[0_0_8px_#10B981]" />
               <span className="font-mono text-[11px] text-ink-dim">
-                {tours} Active Tours
-                <span className="mx-2 text-white/15">|</span>
-                {online} Glasses Online
-                <span className="mx-2 text-white/15">|</span>
-                All Spatial Nodes Synced
+                {paxToday} guests · {mtdK} MTD · QA on plan
               </span>
             </div>
           </div>
@@ -181,7 +177,7 @@ export function OperatorShell({ children }: { children: React.ReactNode }) {
               onClick={() => setBroadcast(true)}
               className="rounded-lg border border-heritage/40 bg-heritage/15 px-3 py-1.5 text-[12px] font-medium text-sun hover:bg-heritage/25"
             >
-              Emergency Broadcast
+              Advisory
             </button>
             <div className="flex items-center gap-2 rounded-lg border border-white/10 bg-elevated py-1 pr-2.5 pl-1">
               <div className="flex h-7 w-7 items-center justify-center rounded-md bg-surface font-mono text-[10px] text-sun">
@@ -202,11 +198,11 @@ export function OperatorShell({ children }: { children: React.ReactNode }) {
       {broadcast && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
           <div className="panel w-full max-w-md p-5 shadow-2xl">
-            <p className="label">Priority channel</p>
-            <h2 className="mt-2 text-lg tracking-tight">Emergency Broadcast</h2>
+            <p className="label">Leadership channel</p>
+            <h2 className="mt-2 text-lg tracking-tight">Property advisory</h2>
             <p className="mt-1 text-[13px] text-ink-dim">
-              Pushes to all 42 online glasses and three guide earpieces. Use for
-              weather, medical, or site closure.
+              Goes to site managers and lead guides — not a public guest
+              interrupt. Use for tomorrow’s yield, weather, or a site closure.
             </p>
             <textarea
               defaultValue="Hold position at current node. Storm cell west of Pidurangala — 18 min. Guides acknowledge."
@@ -225,7 +221,7 @@ export function OperatorShell({ children }: { children: React.ReactNode }) {
                 onClick={() => setBroadcast(false)}
                 className="rounded-lg bg-heritage px-3 py-1.5 text-[13px] font-medium text-white"
               >
-                Send to fleet
+                Issue advisory
               </button>
             </div>
           </div>

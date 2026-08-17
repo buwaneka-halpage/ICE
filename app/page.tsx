@@ -11,16 +11,16 @@ import { TOUR_GROUPS } from "@/lib/tour";
 
 const PITCH = [
   {
-    feature: "Real-time fleet grid (48 units)",
-    proof: "A scalable enterprise hardware operation — not a one-off demo.",
+    feature: "Idle glasses as a P&L line",
+    proof: "Directors see the monthly dollars left on the charger — not a 48-tile battery rack.",
   },
   {
     feature: "HaaS amortization & ROI",
     proof: `Operators see $${MONTHLY_NET_PROFIT_PER_GLASS_USD.toFixed(2)}/month net per glass after month ${BREAK_EVEN_MONTH}.`,
   },
   {
-    feature: "Guide QA & speech analysis",
-    proof: "Quality control for DMCs managing hundreds of staff on-site.",
+    feature: "Guest experience, not speech waveforms",
+    proof: "Quality is a go/no-go for staffing — not a live WPM gauge.",
   },
   {
     feature: "Before/after AR memory slider",
@@ -62,21 +62,21 @@ export default function Home() {
         <section className="grid gap-4 md:grid-cols-2">
           <PortalCard
             href="/operator"
-            kicker="B2B · DMC"
+            kicker="B2B · leadership"
             title="Operator Portal"
-            body="Fleet telemetry, spatial map, guide QA, and HaaS unit economics for the Central Province deployment."
+            body="A briefing for destination directors: contribution, idle hardware, language demand, and which decision to take today."
             stats={[
-              `${FLEET_COUNTS.deployed} glasses online`,
-              "Sigiriya SLAM overlay",
+              `$${MONTHLY_NET_PROFIT_PER_GLASS_USD.toFixed(2)} net / glass`,
               `Break-even month ${BREAK_EVEN_MONTH}`,
+              "German FIT is the growth line",
             ]}
           />
           <PortalCard
             href="/companion"
             kicker="Guest · mobile"
             title="Tourist Companion"
-            body="In-pocket live tour, first-person vault, and a knowledge graph of the day — default dark, golden-hour light mode."
-            stats={["Glasses connected 82%", "Deutsch isolation on", "Fountain #3 in view"]}
+            body="In-pocket live tour, a vault of Sri Lanka’s heritage sites, and the day’s knowledge graph — default dark, golden-hour light."
+            stats={["Sigiriya, Dambulla, Kandy", "Anuradhapura · Polonnaruwa", "Galle Fort · Sri Pada"]}
           />
         </section>
 

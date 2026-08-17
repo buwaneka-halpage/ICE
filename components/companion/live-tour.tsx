@@ -1,7 +1,10 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element -- heritage stills from Wikimedia Commons */
+
 import { useState } from "react";
 import { COMPANION } from "@/lib/tour";
+import { SIGHT_BY_ID } from "@/lib/sights";
 import { useCompanionTheme } from "./shell";
 
 const LANGS = ["English", "Deutsch", "中文", "Français"] as const;
@@ -28,6 +31,17 @@ export function LiveTour() {
           {COMPANION.site}
         </h1>
       </header>
+
+      <figure className="overflow-hidden rounded-2xl border border-white/10">
+        <img
+          src={SIGHT_BY_ID.sigiriya.src}
+          alt="Sigiriya Rock Fortress"
+          className="aspect-[16/10] w-full object-cover"
+        />
+        <figcaption className={`px-3 py-2 font-mono text-[10px] ${muted}`}>
+          Lion Rock · Central Province
+        </figcaption>
+      </figure>
 
       <section className={`rounded-2xl border p-4 ${card}`}>
         <div className="flex items-center justify-between">
