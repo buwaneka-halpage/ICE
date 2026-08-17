@@ -1,15 +1,11 @@
-import { FLEET_COUNTS } from "@/lib/fleet";
-import { FLEET_SIZE, MONTHLY_NET_PROFIT_PER_GLASS_USD, utilizationPct } from "@/lib/metrics";
-import type { Capture } from "@/lib/captures";
+import { FLEET_SIZE, DEPLOYED_UNITS, MONTHLY_NET_PROFIT_PER_GLASS_USD, utilizationPct } from "./metrics";
+import type { Capture } from "./captures";
 
 export const SCENARIO_LABEL = "Scenario · Sigiriya high season · 48 glasses";
 
-export const SURGE_KEY = "see-mo-surge";
-export const ROSTER_KEY = "see-mo-roster";
-
 export function fleetAfterSurge(approved: boolean) {
-  const docked = approved ? 0 : FLEET_COUNTS.docked;
-  const deployed = approved ? FLEET_SIZE : FLEET_COUNTS.deployed;
+  const docked = approved ? 0 : FLEET_SIZE - DEPLOYED_UNITS;
+  const deployed = approved ? FLEET_SIZE : DEPLOYED_UNITS;
   return {
     docked,
     deployed,

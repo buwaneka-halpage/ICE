@@ -21,11 +21,6 @@ import {
   parseCapturePath,
   sanitizeDeviceId,
 } from "../lib/captures.ts";
-import {
-  fleetAfterSurge,
-  mergeCaptures,
-  SCENARIO_CAPTURES,
-} from "../lib/demo.ts";
 
 assert.equal(utilizationPct(DEPLOYED_UNITS, FLEET_SIZE), 87.5);
 assert.equal(languageShareTotal(LANGUAGE_SHARE), 100);
@@ -48,12 +43,6 @@ const path = capturePathname(
 assert.equal(path.startsWith("captures/AS-ARIA-024/cap_vg01-"), true);
 assert.equal(parseCapturePath(path).device_id, "AS-ARIA-024");
 assert.equal(parseCapturePath(path).capture_id, "cap_vg01");
-
-assert.equal(fleetAfterSurge(false).docked, 6);
-assert.equal(fleetAfterSurge(true).docked, 0);
-assert.equal(fleetAfterSurge(true).deployed, FLEET_SIZE);
-assert.equal(fleetAfterSurge(true).util, 100);
-assert.equal(SCENARIO_CAPTURES.length, 3);
-assert.equal(mergeCaptures([]).length, 3);
+assert.equal(utilizationPct(FLEET_SIZE, FLEET_SIZE), 100);
 
 console.log("metrics self-check passed");

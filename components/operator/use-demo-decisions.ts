@@ -1,40 +1,50 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { ROSTER_KEY, SURGE_KEY, fleetAfterSurge } from "@/lib/demo";
+import { useCallback, useSyncExternalStore } from "react";
+import { fleetAfterSurge } from "@/lib/demo";
+
+let surge = false;
+let roster = false;
+const listeners = new Set<() => void>();
+
+function subscribe(cb: () => void) {
+  listeners.add(cb);
+  return () => listeners.delete(cb);
+}
+
+function snapshot() {
+  return `${Number(surge)}${Number(roster)}`;
+}
+
+function emit() {
+  for (const listener of listeners) listener();
+}
 
 export function useDemoDecisions() {
-  const [surge, setSurge] = useState(false);
-  const [roster, setRoster] = useState(false);
-
-  useEffect(() => {
-    setSurge(sessionStorage.getItem(SURGE_KEY) === "1");
-    setRoster(sessionStorage.getItem(ROSTER_KEY) === "1");
-  }, []);
+  const snap = useSyncExternalStore(subscribe, snapshot, () => "00");
+  const surgeOn = snap[0] === "1";
+  const rosterOn = snap[1] === "1";
 
   const approveSurge = useCallback(() => {
-    sessionStorage.setItem(SURGE_KEY, "1");
-    setSurge(true);
+    surge = true;
+    emit();
   }, []);
-
   const requestRoster = useCallback(() => {
-    sessionStorage.setItem(ROSTER_KEY, "1");
-    setRoster(true);
+    roster = true;
+    emit();
   }, []);
-
   const reset = useCallback(() => {
-    sessionStorage.removeItem(SURGE_KEY);
-    sessionStorage.removeItem(ROSTER_KEY);
-    setSurge(false);
-    setRoster(false);
+    surge = false;
+    roster = false;
+    emit();
   }, []);
 
   return {
-    surge,
-    roster,
+    surge: surgeOn,
+    roster: rosterOn,
     approveSurge,
     requestRoster,
     reset,
-    ...fleetAfterSurge(surge),
+    ...fleetAfterSurge(surgeOn),
   };
 }
